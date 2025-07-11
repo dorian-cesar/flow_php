@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Compra con Flow.cl</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h2 class="mb-4">Comprar producto</h2>
+
+    <div class="card p-4 shadow-sm">
+      <div class="mb-3">
+        <label class="form-label">Producto</label>
+        <select id="producto" class="form-select">
+          <option value="1000">Galletas ($1.000)</option>
+          <option value="2500">Chocolate ($2.500)</option>
+          <option value="5000">Caja regalo ($5.000)</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Tu correo</label>
+        <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com">
+      </div>
+
+      <button id="btnPagar" class="btn btn-primary">Pagar con Flow</button>
+    </div>
+  </div>
+
+  <script>
+    const APIKEY = "1FD524C1-E73C-48D9-96F2-25LAD4ABE88D"; // Reemplaza con tu APIKEY
+    const SECRETKEY = "TU_SECRET_KEY_SANDBOX"; // No se usa aquí (solo en backend)
+    const URL_FLOW = "https://sandbox.flow.cl/api/payment/create";
+
+    <!-- Igual que antes, solo cambia la URL del $.post -->
+
+  $('#btnPagar').click(function () {
+    const amount = $('#producto').val();
+    const email = $('#email').val();
+    if (!email) return alert("Debes ingresar un correo válido");
+
+    $.post('crear_pago.php', {
+      amount: amount,
+      email: email
+    }, function (resp) {
+      if (resp.url) {
+        window.location.href = resp.url; // redirige a Flow
+      } else {
+        alert("Error en el pago: " + JSON.stringify(resp));
+      }
+    }, 'json').fail(function (xhr) {
+      alert("Error al conectar con Flow: " + xhr.responseText);
+    });
+  });
+</script>
+
+  </script>
+
+</body>
+</html>
