@@ -17,8 +17,8 @@ $params = [
   'amount' => $amount,
   'email' => $email,
   'paymentMethod' => 9,
-  'urlReturn' => 'https://flow.dev-wit.com/sandbox/retorno.html',
-  'urlConfirmation' => 'https://flow.dev-wit.com/sandbox/confirmacion.php'
+  'urlReturn' => 'https://pullman-bus.dev-wit.com/flow/retorno.html',
+  'urlConfirmation' => 'https://pullman-bus.dev-wit.com/flow/confirmacion.php'
 ];
 
 // Ordenar parámetros por nombre
